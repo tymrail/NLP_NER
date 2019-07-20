@@ -1,0 +1,3 @@
+Start training at 2019-07-20 10:20:20
+|Epoch:0|progess: 27.09733362237156%|avg_loss:5.15582875585556|
+|Epoch:0|progess: 54.19466724474312%|avg_loss:4.193928407812119|
