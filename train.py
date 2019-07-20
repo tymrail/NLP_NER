@@ -73,7 +73,7 @@ with open("runs/" + file_name, "w+") as f:
 START_TAG = "<START>"
 STOP_TAG = "<STOP>"
 EMBEDDING_DIM = 200
-HIDDEN_DIM = 128
+HIDDEN_DIM = 200
 
 TAG_SET_CoNLL, tag_to_ix, word_to_ix, training_data, testa_data, testb_data = get_data_large()
 # TAG_SET_CoNLL, tag_to_ix, word_to_ix, training_data, testa_data, testb_data = get_data_toy()
