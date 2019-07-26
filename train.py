@@ -26,7 +26,7 @@ torch.manual_seed(1)
 gpu_available = torch.cuda.is_available()
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-GLOVE_EMBEDDING_PATH = 'glove/glove.6B.200d.txt'
+GLOVE_EMBEDDING_PATH = 'glove/glove.840B.300d.txt'
 
 if gpu_available:
     torch.cuda.manual_seed(1)
@@ -40,7 +40,7 @@ def load_embeddings(path):
 
 def build_matrix(word_index, path):
     embedding_index = load_embeddings(path)
-    embedding_matrix = np.zeros((len(word_index) + 1, 200))
+    embedding_matrix = np.zeros((len(word_index) + 1, 300))
     unknown_words = []
     
     for word, i in word_index.items():
@@ -72,8 +72,8 @@ with open("runs/" + file_name, "w+") as f:
 
 START_TAG = "<START>"
 STOP_TAG = "<STOP>"
-EMBEDDING_DIM = 200
-HIDDEN_DIM = 200
+EMBEDDING_DIM = 300
+HIDDEN_DIM = 300
 
 TAG_SET_CoNLL, tag_to_ix, word_to_ix, training_data, testa_data, testb_data = get_data_large()
 # TAG_SET_CoNLL, tag_to_ix, word_to_ix, training_data, testa_data, testb_data = get_data_toy()
@@ -101,7 +101,7 @@ with torch.no_grad():
         precheck_tags = precheck_tags.cuda()
     print(model(precheck_sent))
 
-for epoch in range(48):
+for epoch in range(100):
     global_loss = 0
     index_t = 0
     for sentence, tags in training_data:
@@ -140,7 +140,7 @@ for epoch in range(48):
         f.write("|Epoch:" + str(epoch) + "|avg_loss:" + str(global_loss / index_t) + "|\n")
     print("Epoch:" + str(epoch) + "|avg_loss:" + str(global_loss / len(training_data)) + "|")
 
-torch.save(model, "saved_models/model_ver_5.pkl")
+torch.save(model, "saved_models/model_ver_12.pkl")
 
 print("Training Done.")
 
